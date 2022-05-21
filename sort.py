@@ -15,6 +15,7 @@ def merge_sort(arr: list) -> list:
 
     return merge(merge_sort(left), merge_sort(right))
 
+
 def merge(left: list, right: list) -> list:
     merged = []
     i, j = 0, 0
@@ -31,16 +32,21 @@ def merge(left: list, right: list) -> list:
     merged += right[j:]
     return merged
      
+
 def insertion_sort(arr: list) -> list:
 
     for i in range(1, len(arr)):
-        n = i - 1
-        while n > 0 and arr[n] > arr[i]:
-            arr[n+1] = arr[n]
+        n = i
+        while n > 0 and arr[n] < arr[n-1]:
+            arr[n], arr[n-1] = arr[n-1], arr[n]
             n-=1
-        arr[n+1] = arr[i]
-
     return arr
+
+
+def selection_sort(arr: list) -> list:
+
+    
+
 
 class TestSorts(TestCase):
 
@@ -59,5 +65,7 @@ class TestSorts(TestCase):
     def test_insertion(self):
         for case in self.cases:
             self.assertEqual(insertion_sort(case), sorted(case))
+
+
 
 unittest.main()
