@@ -1,5 +1,3 @@
-from math import ceil, floor
-
 def grade_school(num1: int, num2: int) -> int:
     result, n = 0, 1
     for i in str(num1)[::-1]:

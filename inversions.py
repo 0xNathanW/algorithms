@@ -7,4 +7,3 @@ def inversions(arr: list) -> int:
     left = inversions(arr[:mid])
     right = inversions(arr[mid:])
     
-    

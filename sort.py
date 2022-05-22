@@ -45,7 +45,24 @@ def insertion_sort(arr: list) -> list:
 
 def selection_sort(arr: list) -> list:
 
+    for i in range(len(arr)-1):
+        min = i
+        for j in range(i+1, len(arr)):
+            if arr[j] < arr[min]:
+                min = j
+        arr[i], arr[min] = arr[min], arr[i]
     
+    return arr
+
+
+def bubble_sort(arr: list) -> list:
+
+    for i in range(len(arr)-1):
+        for j in range(0, len(arr)-i-1):
+            if arr[j+1] < arr[j]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    
+    return arr
 
 
 class TestSorts(TestCase):
@@ -66,6 +83,12 @@ class TestSorts(TestCase):
         for case in self.cases:
             self.assertEqual(insertion_sort(case), sorted(case))
 
+    def test_selection(self):
+        for case in self.cases:
+            self.assertEqual(selection_sort(case), sorted(case))
 
+    def test_bubble(self):
+        for case in self.cases:
+            self.assertEqual(bubble_sort(case), sorted(case))
 
 unittest.main()

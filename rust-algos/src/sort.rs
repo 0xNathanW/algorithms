@@ -56,7 +56,6 @@ fn merge(left: &Vec<i32>, right: &Vec<i32>) -> Vec<i32> {
 
 
 
-
 #[cfg(test)]
 mod test {
     use rand::{random, Rng};
