@@ -60,7 +60,7 @@ def brute(arr):
     return low, high, max_sum
 
 
-
+# Plots runtimes of the two algorithms.
 def compare():
 
     fig, ax = plt.subplots()
