@@ -14,11 +14,6 @@
 #     def right(self):
 #         return (self.idx * 2) + 1
 
-
-from msilib.schema import Error
-from re import I
-
-
 class MaxHeap:
 
     def __init__(self, arr: list) -> None:
