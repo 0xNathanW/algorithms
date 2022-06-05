@@ -1,19 +1,3 @@
-# For heaps with non-number elements.
-# class Element:
-
-#     def __init__(self, key, idx):
-#         self.key = key
-#         self.idx = idx
-
-#     def parent(self):
-#         return self.idx // 2
-    
-#     def left(self):
-#         return self.idx * 2
-    
-#     def right(self):
-#         return (self.idx * 2) + 1
-
 class MaxHeap:
 
     def __init__(self, arr: list) -> None:

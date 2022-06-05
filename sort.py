@@ -70,7 +70,7 @@ def quick_sort(arr: list, low=0, high=None):
         quick_sort(arr, low, q-1)
         quick_sort(arr, q+1, high)
 
-def partition(arr, low, high):
+def partition(arr: list, low: int, high:int):
 
     pivot = arr[high]
     i = low-1
@@ -84,8 +84,8 @@ def partition(arr, low, high):
     return i+1, arr
 
 # best when range of possible values is small.
-def counting_sort(arr: list):
-    k = [0] * max(arr)+1
+def counting_sort(arr: list) -> list:
+    k = [0] * (max(arr)+1)
     out = [0] * len(arr)
     for elem in arr:
         k[elem] += 1
@@ -101,13 +101,13 @@ def counting_sort(arr: list):
         
     return out
 
-def radix_sort(arr):
+def radix_sort(arr: list) -> list:
     maxi = max(arr)
     for i in range(1, len(str(maxi))):
         arr = counting_sort(arr)
     return arr
 
-def counting4radix(arr):
+def counting4radix(arr: list) -> list:
     k = [0] * 10 # working in base 10.
     out = [0] * len(arr)
     for i in arr:
@@ -120,7 +120,23 @@ def counting4radix(arr):
         k[elem] -= 1
     return out
 
-radix_sort([0, 3, 13, 1343, 3, 23, 135])
+def bucket_sort(arr: list) -> list:
+
+    bucket_size = max(arr) / len(arr)
+    buckets = [[] for i in range(len(arr))]
+    out = []
+
+    for i in range(len(arr)):
+        j = int(arr[i]//bucket_size)
+        if j != len(buckets):    
+            buckets[j].append(arr[i])
+        else:
+            buckets[len(buckets)-1].append(arr[i])
+
+    for b in buckets:
+        out += insertion_sort(b)
+
+    return out
 
 
 class TestSorts(TestCase):
@@ -158,4 +174,5 @@ class TestSorts(TestCase):
         for case in [self.cases[2], self.cases[4]]:
             self.assertEqual(counting_sort(case), sorted(case))
 
-#unittest.main()
+
+unittest.main()
