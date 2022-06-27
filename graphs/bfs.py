@@ -1,5 +1,6 @@
 from ast import Pass
 from collections import deque
+from hashlib import new
 import unittest
 
 ## Assuming graphs are repersented as adjecency lists (dict).
@@ -35,6 +36,32 @@ def shortest_path(graph, src, target):
                 if e == target:
                     break
     return dist[target]
+
+def shortest_path2(graph, source, target):
+    
+    queue = [[source]]
+    visited = set()
+
+    if source == target: 
+        return queue[0]
+
+    while queue:
+        
+        path = queue.pop(0)
+        vertex = path[-1]
+
+        if vertex not in visited:
+            for neighbour in graph[vertex]:
+                new_path = list(path)
+                new_path.append(neighbour)
+                queue.append(new_path)
+
+                if neighbour == target:
+                    return new_path
+            
+            visited.add(vertex)
+    
+    raise Exception("Connecting path does not exist")
 
 # Graph must be undirected.
 def connected_components(graph):
@@ -85,8 +112,20 @@ class Tests(unittest.TestCase):
         self.assertEqual(shortest_path(t, "F", "A"), 2)
         self.assertEqual(shortest_path(t, "B", "F"), 3)
         self.assertEqual(shortest_path(t, "B", "D"), 1)
-        
 
-unittest.main()
+t = {
+            "H": ["D", "E", "F", "G"],
+            "E": ["B", "H"],
+            "D": ["B", "H"],
+            "F": ["H", "C"],
+            "G": ["C", "H"],
+            "B": ["D", "A", "E"], 
+            "C": ["A", "F", "G"], 
+            "A": ["B", "C"]
+        }        
+
+print(shortest_path2(t, "H", "A"))
+
+# unittest.main()
 
 
