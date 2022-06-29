@@ -1,3 +1,7 @@
+from cgi import test
+from cgitb import small
+
+
 class MaxHeap:
 
     def __init__(self, arr: list) -> None:
@@ -13,10 +17,10 @@ class MaxHeap:
         return idx // 2
         
     def left(self, idx: int) -> int:
-        return (idx * 2) + 1
+        return (idx * 2) 
 
     def right(self, idx: int) -> int:
-        return (idx * 2) + 2 
+        return (idx * 2) + 1 
 
     def heapify(self, i: int):
         l = self.left(i)
@@ -53,14 +57,70 @@ class MaxHeap:
         return max
 
 
+class MinHeap:
+
+    def __init__(self, items):
+        idx = len(items) // 2
+        self.size = len(items)
+        self.heap = [0] + items[:]
+        while idx > 0:
+            self.sift_down(idx)
+            idx -= 1
+
+    def parent(self, idx: int) -> int:
+        return idx // 2
         
-testArr = MaxHeap([4, 1, 3, 2, 16, 9, 10, 14, 8, 7])
-print(testArr.arr)
-print(testArr.max())
-print(testArr.arr)
-print(testArr.extract_max())
-print(testArr.arr)
+    def left(self, idx: int) -> int:
+        return (idx * 2) 
 
+    def right(self, idx: int) -> int:
+        return (idx * 2) + 1 
+        
+    def insert(self, item):
+        self.heap.append(item)
+        self.size += 1
+        self.sift_up(self.size)
 
+    def sift_up(self, idx):
 
+        while self.parent(idx) > 0:
+            if self.heap[idx] < self.heap[self.parent(idx)]:
 
+                self.heap[idx], self.heap[self.parent(idx)] = \
+                self.heap[self.parent(idx)], self.heap[idx]
+            
+            i = self.parent(idx)
+
+    def sift_down(self, idx):
+
+        while self.left(idx) <= self.size:
+
+            m = self.min_child(idx)
+
+            if self.heap[idx] > self.heap[m]:
+                self.heap[idx], self.heap[m] = self.heap[m], self.heap[idx]
+            
+            idx = m
+        
+    def min_child(self, idx):
+        
+        l, r = self.left(idx), self.right(idx)
+
+        if r > self.size:
+            return l
+        return l if self.heap[l] < self.heap[r] else r
+
+    def extract_min(self):
+        min = self.heap[1]
+        self.heap[1] = self.heap[self.size]
+        self.size -= 1
+        self.heap.pop()
+        self.sift_down(1)
+        return min
+
+        
+testArr = MinHeap([4, 1, 3, 2, 16, 9, 10, 14, 8, 7])
+print(testArr.heap)
+print(testArr.extract_min())
+print(testArr.extract_min())
+print(testArr.heap)
