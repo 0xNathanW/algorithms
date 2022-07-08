@@ -50,11 +50,6 @@ def find_shortest_path(graph, source, target):
     
     return path[::-1]
 
-# Eager.
-def dijkstras():
-
-
-
 class Tests(unittest.TestCase):
 
     graph = {   # Node, distance
